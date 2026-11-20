@@ -7,164 +7,249 @@
     <link rel="stylesheet" href="style.css">
     <script src="actions.js" defer></script>
 </head>
-
 <body>
-    <header class="topbar">
-        <a class="brand" href="#">✦ Cell Quest</a>
 
-        <div class="stats">
-            <div class="stat-card">
-                <span class="stat-label">POINTS</span>
-                <strong id="points">000</strong>
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-icon">🧬</span>
+            <div>
+                <h1>Cell Quest</h1>
+                <p>The Survival Challenge</p>
+            </div>
+        </div>
+
+        <div class="game-stats">
+            <div class="stat">
+                <span>⭐</span>
+                <div>
+                    <small>POINTS</small>
+                    <strong id="points">0</strong>
+                </div>
             </div>
 
-            <div class="stat-card">
-                <span class="stat-label">LIVES</span>
-                <strong id="lives">♥ ♥ ♥</strong>
+            <div class="stat">
+                <span>❤️</span>
+                <div>
+                    <small>LIVES</small>
+                    <strong id="lives">3</strong>
+                </div>
             </div>
         </div>
     </header>
 
-    <main class="game-layout">
+    <div class="game-layout">
 
         <aside class="sidebar">
-            <p class="menu-title">YOUR JOURNEY</p>
+            <h2>YOUR JOURNEY</h2>
 
             <nav class="navigation">
-                <button class="nav-button active">⌂ Home</button>
-                <button class="nav-button">◎ Levels</button>
-                <button class="nav-button">✧ Cell Explorer</button>
-                <button class="nav-button">⚑ Missions</button>
+                <button class="nav-button active" data-section="home">
+                    🏠 Home
+                </button>
+                <button class="nav-button" data-section="levels">
+                    🧩 Missions
+                </button>
+                <button class="nav-button" data-section="about">
+                    🔬 Cell Explorer
+                </button>
             </nav>
 
-            <div class="sidebar-note">
-                <strong>Mission tip</strong>
-                <p>Complete each challenge to unlock the next stage of your cell adventure.</p>
+            <div class="sidebar-bottom">
+                <p>Learn. Explore. Survive.</p>
+                <span>🧫</span>
             </div>
         </aside>
 
-        <section class="main-content">
+        <main class="main-content">
 
-            <div class="welcome-row">
-                <div>
-                    <p class="eyebrow">YOUR CELL BIOLOGY ADVENTURE</p>
-                    <h1>Choose your next <span>challenge.</span></h1>
-                    <p class="description">
-                        Complete the five levels in order to become a Cell Master.
+            <section id="home-screen" class="screen">
+                <div class="welcome-card">
+                    <span class="eyebrow">WELCOME, CELL EXPLORER!</span>
+                    <h2>Can you keep the cell alive?</h2>
+                    <p>
+                        Explore the world of cell biology, complete five
+                        missions, and prove your knowledge to help the
+                        cell survive.
                     </p>
+                    <button id="start-button" class="primary-button">
+                        Start Your Journey →
+                    </button>
                 </div>
 
-                <div class="level-pill">✦ 5 LEVELS</div>
-            </div>
-
-            <section class="progress-panel">
-                <div class="progress-heading">
-                    <div>
-                        <p class="eyebrow">YOUR JOURNEY</p>
-                        <h2>Level progress</h2>
+                <div class="home-grid">
+                    <div class="info-card">
+                        <span class="large-icon">🧬</span>
+                        <h3>5 Missions</h3>
+                        <p>Explore five challenges about cell biology.</p>
                     </div>
 
-                    <strong id="progress-count">0 / 5 completed</strong>
-                </div>
+                    <div class="info-card">
+                        <span class="large-icon">⭐</span>
+                        <h3>Earn Points</h3>
+                        <p>Answer questions correctly to earn points.</p>
+                    </div>
 
-                <div class="progress-track">
-                    <div class="progress-fill" id="progress-fill"></div>
+                    <div class="info-card">
+                        <span class="large-icon">❤️</span>
+                        <h3>Protect Your Lives</h3>
+                        <p>Be careful! Incorrect answers cost one life.</p>
+                    </div>
                 </div>
-
-                <p class="progress-caption" id="progress-caption">
-                    Start with Level 1 and unlock each challenge as you go.
-                </p>
             </section>
 
-            <section class="levels-section">
-
+            <section id="levels-screen" class="screen hidden">
                 <div class="section-heading">
-                    <div>
-                        <p class="eyebrow">THE FIVE STAGES</p>
-                        <h2>Choose a level</h2>
-                    </div>
-
-                    <span class="lock-note">🔒 Complete levels in order</span>
+                    <span class="eyebrow">YOUR PROGRESS</span>
+                    <h2>Choose your next challenge</h2>
+                    <p>Complete each mission to unlock the next one.</p>
                 </div>
 
-                <div class="level-grid">
+                <div class="progress-card">
+                    <div class="progress-information">
+                        <strong>Mission progress</strong>
+                        <span id="progress-count">0 / 5 completed</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="progress-fill"></div>
+                    </div>
+                    <p id="progress-caption">Your cell journey starts here!</p>
+                </div>
 
-                    <button class="level-card selected" data-level="1">
-                        <span class="level-number">LEVEL 01</span>
-                        <span class="level-icon">🔬</span>
-                        <strong>Cell Explorer</strong>
-                        <span class="level-description">
-                            Discover the cell and identify its main parts.
-                        </span>
-                        <span class="level-status" id="status-1">● Available</span>
+                <div id="level-list" class="level-grid"></div>
+
+                <div id="selected-level" class="selected-level">
+                    <div>
+                        <span class="eyebrow">READY?</span>
+                        <h3 id="selected-title">Cell Explorer</h3>
+                        <p id="selected-description">
+                            Discover the basic structures of a cell.
+                        </p>
+                    </div>
+                    <button id="play-level-button" class="primary-button">
+                        Start Mission →
                     </button>
-
-                    <button class="level-card locked" data-level="2" disabled>
-                        <span class="level-number">LEVEL 02</span>
-                        <span class="level-icon">🧩</span>
-                        <strong>Organelle Mission</strong>
-                        <span class="level-description">
-                            Match organelles with their functions.
-                        </span>
-                        <span class="level-status" id="status-2">🔒 Locked</span>
-                    </button>
-
-                    <button class="level-card locked" data-level="3" disabled>
-                        <span class="level-number">LEVEL 03</span>
-                        <span class="level-icon">💧</span>
-                        <strong>Transport Challenge</strong>
-                        <span class="level-description">
-                            Explore diffusion, osmosis, and active transport.
-                        </span>
-                        <span class="level-status" id="status-3">🔒 Locked</span>
-                    </button>
-
-                    <button class="level-card locked" data-level="4" disabled>
-                        <span class="level-number">LEVEL 04</span>
-                        <span class="level-icon">⚡</span>
-                        <strong>Energy Crisis</strong>
-                        <span class="level-description">
-                            Learn how cells use ATP for energy.
-                        </span>
-                        <span class="level-status" id="status-4">🔒 Locked</span>
-                    </button>
-
-                    <button class="level-card locked" data-level="5" disabled>
-                        <span class="level-number">LEVEL 05</span>
-                        <span class="level-icon">🌱</span>
-                        <strong>Cell Survival</strong>
-                        <span class="level-description">
-                            Apply what you know to keep a cell functioning.
-                        </span>
-                        <span class="level-status" id="status-5">🔒 Locked</span>
-                    </button>
-
                 </div>
             </section>
 
-            <section class="selected-panel">
-                <div>
-                    <p class="eyebrow" id="selected-eyebrow">
-                        CURRENT CHALLENGE · LEVEL 01
+            <section id="game-screen" class="screen hidden">
+                <div class="game-heading">
+                    <button id="back-to-levels" class="back-button">
+                        ← Back to missions
+                    </button>
+                    <span id="current-level-label">MISSION 1 OF 5</span>
+                </div>
+
+                <div class="question-progress">
+                    <div class="question-progress-top">
+                        <span id="question-counter">Question 1 of 3</span>
+                        <span id="question-category">CELL BIOLOGY</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="question-progress-fill"></div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <span class="eyebrow">YOUR CHALLENGE</span>
+                    <h2 id="question-title">Question goes here</h2>
+                    <p id="question-instruction">
+                        Choose the best answer.
                     </p>
 
-                    <h2 id="selected-title">Cell Explorer</h2>
+                    <div id="answer-options" class="answer-options"></div>
 
-                    <p id="selected-description">
-                        Discover the cell and identify its main parts.
+                    <div id="feedback-box" class="feedback-box hidden">
+                        <h3 id="feedback-title"></h3>
+                        <p id="feedback-text"></p>
+                    </div>
+
+                    <button id="next-question-button" class="primary-button hidden">
+                        Continue →
+                    </button>
+                </div>
+            </section>
+
+            <section id="results-screen" class="screen hidden">
+                <div class="results-card">
+                    <span class="results-icon">🏆</span>
+                    <span class="eyebrow">MISSION COMPLETE</span>
+                    <h2 id="results-title">Amazing work!</h2>
+                    <p id="results-description">
+                        You completed the Cell Quest challenge.
+                    </p>
+
+                    <div class="results-stats">
+                        <div>
+                            <strong id="final-score">0</strong>
+                            <span>POINTS</span>
+                        </div>
+                        <div>
+                            <strong id="final-correct">0 / 15</strong>
+                            <span>CORRECT ANSWERS</span>
+                        </div>
+                        <div>
+                            <strong id="final-levels">0 / 5</strong>
+                            <span>MISSIONS</span>
+                        </div>
+                    </div>
+
+                    <button id="play-again-button" class="primary-button">
+                        Play Again ↻
+                    </button>
+                </div>
+            </section>
+
+            <section id="about-screen" class="screen hidden">
+                <div class="section-heading">
+                    <span class="eyebrow">EXPLORE THE SCIENCE</span>
+                    <h2>Welcome to the cell!</h2>
+                    <p>
+                        Cells are the basic units of life. Each structure
+                        has a specific function that helps the cell survive.
                     </p>
                 </div>
 
-                <button id="complete-button" class="primary-button">
-                    Complete level (test) →
-                </button>
+                <div class="about-grid">
+                    <div class="info-card">
+                        <span class="large-icon">🧠</span>
+                        <h3>Nucleus</h3>
+                        <p>Contains DNA and controls many cell activities.</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="large-icon">⚡</span>
+                        <h3>Mitochondria</h3>
+                        <p>Produce most of the ATP used by the cell.</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="large-icon">🏭</span>
+                        <h3>Ribosomes</h3>
+                        <p>Build proteins using genetic instructions.</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="large-icon">🛡️</span>
+                        <h3>Cell membrane</h3>
+                        <p>Controls what enters and leaves the cell.</p>
+                    </div>
+                </div>
             </section>
 
             <p id="status-message" class="status-message">
-                Level 1 is ready. Select it to begin.
+                Ready to explore?
             </p>
 
-        </section>
-    </main>
+            <footer class="game-footer">
+                <a
+                    href="https://forms.gle/cTQ516TPk3ywntYT6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Give feedback about this game
+                </a>
+                <span>Cell Quest | Biology Learning Game</span>
+            </footer>
+
+        </main>
+    </div>
+
 </body>
 </html>
