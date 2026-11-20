@@ -8,118 +8,22 @@
     <script src="actions.js" defer></script>
 </head>
 <body>
+    <main class="welcome-screen">
+        <section class="welcome-card">
+            <p class="eyebrow">A CELL BIOLOGY ADVENTURE</p>
+            <div class="cell-icon">🧫</div>
 
-    <header class="topbar">
-        <a class="brand" href="#">✦ Cell Quest</a>
+            <h1>Cell Quest</h1>
+            <p class="subtitle">The Survival Challenge</p>
 
-        <div class="stats">
-            <div class="stat-card">
-                <span class="stat-label">POINTS</span>
-                <strong id="points">000</strong>
-            </div>
-
-            <div class="stat-card">
-                <span class="stat-label">LIVES</span>
-                <strong id="lives">♥ ♥ ♥</strong>
-            </div>
-        </div>
-    </header>
-
-    <main class="game-layout">
-
-        <aside class="sidebar">
-            <p class="menu-title">YOUR JOURNEY</p>
-
-            <nav class="navigation">
-                <button class="nav-button active" data-section="Home">⌂ Home</button>
-                <button class="nav-button" data-section="Cell Explorer">◎ Cell Explorer</button>
-                <button class="nav-button" data-section="Missions">✧ Missions</button>
-                <button class="nav-button" data-section="Transport">⇄ Transport</button>
-                <button class="nav-button" data-section="Energy">ϟ Energy</button>
-            </nav>
-
-            <div class="sidebar-note">
-                <strong>Mission tip</strong>
-                <p>Every organelle has an important job. Explore the cell to discover how it survives!</p>
-            </div>
-        </aside>
-
-        <section class="main-content">
-
-            <div class="welcome-row">
-                <div>
-                    <p class="eyebrow">WELCOME, CELL EXPLORER</p>
-                    <h1>Ready for your next <span>Cell Quest?</span></h1>
-                    <p class="description">Discover the tiny world that keeps living things alive.</p>
-                </div>
-            </div>
-
-            <section class="cell-panel">
-                <div class="panel-heading">
-                    <div>
-                        <p class="eyebrow">THE MICROSCOPIC WORLD</p>
-                        <h2>Explore the cell</h2>
-                    </div>
-
-                    <span class="cell-tag">EUKARYOTIC CELL</span>
-                </div>
-
-                <div class="cell-scene">
-                    <div class="cell-art">
-                        <div class="cell-membrane">
-                            <div class="nucleus">
-                                <span></span>
-                            </div>
-
-                            <div class="mitochondrion mito-one"></div>
-                            <div class="mitochondrion mito-two"></div>
-
-                            <div class="golgi">
-                                <i></i>
-                                <i></i>
-                                <i></i>
-                            </div>
-
-                            <div class="ribosome"></div>
-                        </div>
-                    </div>
-
-                    <div class="cell-caption">
-                        <strong>A cell is a tiny living system!</strong>
-                        <p>Its organelles work together to keep it functioning.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="bottom-row">
-
-                <div class="progress-card">
-                    <div>
-                        <p class="eyebrow">YOUR PROGRESS</p>
-                        <h3>5 challenges ahead</h3>
-                        <p>Learn, explore, and become a Cell Master.</p>
-                    </div>
-                </div>
-
-                <div class="start-card">
-                    <div>
-                        <p class="eyebrow">ARE YOU READY?</p>
-                        <h3>Start exploring!</h3>
-                    </div>
-
-                    <button id="start-button" class="start-button">
-                        Start Game →
-                    </button>
-                </div>
-
-            </section>
-
-            <p id="status-message" class="status-message">
-                Choose a section or start your adventure.
+            <p class="intro">
+                Explore the cell, discover its organelles, and learn
+                how everything works together to keep a cell alive.
             </p>
 
+            <button id="start-button">Start Game</button>
+            <p id="start-message"></p>
         </section>
     </main>
-
 </body>
 </html>
