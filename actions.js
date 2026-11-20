@@ -1,14 +1,11 @@
 
 /* =====================================
-   CELL QUEST - GAME QUESTIONS
+   QUESTIONS
 ===================================== */
 
 const levels = [
-
-    // LEVEL 1
     {
         name: "Level 1: Cell Explorer",
-
         questions: [
             {
                 question: "Which organelle contains DNA?",
@@ -20,7 +17,7 @@ const levels = [
                 question: "Which structure controls what enters and leaves the cell?",
                 answers: ["Cell membrane", "Nucleus", "Ribosome"],
                 correct: 0,
-                explanation: "The cell membrane controls the movement of substances into and out of the cell."
+                explanation: "The cell membrane controls what enters and leaves the cell."
             },
             {
                 question: "Which organelle produces most of the cell's ATP?",
@@ -31,36 +28,32 @@ const levels = [
         ]
     },
 
-    // LEVEL 2
     {
         name: "Level 2: Organelle Mission",
-
         questions: [
             {
                 question: "Which structure makes proteins?",
                 answers: ["Ribosomes", "Vacuoles", "Nucleus"],
                 correct: 0,
-                explanation: "Ribosomes build proteins using amino acids."
+                explanation: "Ribosomes build proteins."
             },
             {
                 question: "Which organelle modifies and packages proteins?",
                 answers: ["Mitochondria", "Golgi apparatus", "Lysosome"],
                 correct: 1,
-                explanation: "The Golgi apparatus modifies, sorts, and packages proteins."
+                explanation: "The Golgi apparatus modifies and packages proteins."
             },
             {
-                question: "Which organelle breaks down waste inside the cell?",
+                question: "Which organelle breaks down waste?",
                 answers: ["Chloroplast", "Nucleus", "Lysosome"],
                 correct: 2,
-                explanation: "Lysosomes contain enzymes that break down waste materials."
+                explanation: "Lysosomes contain enzymes that break down waste."
             }
         ]
     },
 
-    // LEVEL 3
     {
         name: "Level 3: Transport Challenge",
-
         questions: [
             {
                 question: "What is diffusion?",
@@ -70,7 +63,7 @@ const levels = [
                     "Movement of water only"
                 ],
                 correct: 0,
-                explanation: "Diffusion moves particles from an area of higher concentration to an area of lower concentration."
+                explanation: "Diffusion moves particles from high to low concentration."
             },
             {
                 question: "What is osmosis?",
@@ -90,15 +83,13 @@ const levels = [
                     "Active transport"
                 ],
                 correct: 2,
-                explanation: "Active transport uses energy, often from ATP, to move substances against their concentration gradient."
+                explanation: "Active transport uses energy to move substances against their concentration gradient."
             }
         ]
     },
 
-    // LEVEL 4
     {
         name: "Level 4: Energy Crisis",
-
         questions: [
             {
                 question: "What is the main role of ATP?",
@@ -108,27 +99,25 @@ const levels = [
                     "Build the cell membrane"
                 ],
                 correct: 0,
-                explanation: "ATP provides usable energy for many cellular processes."
+                explanation: "ATP provides energy for many cellular processes."
             },
             {
                 question: "Which organelle produces most ATP during aerobic respiration?",
                 answers: ["Nucleus", "Mitochondria", "Ribosomes"],
                 correct: 1,
-                explanation: "Mitochondria produce most ATP during aerobic cellular respiration."
+                explanation: "Mitochondria produce most ATP during aerobic respiration."
             },
             {
                 question: "What does ATP become after losing its terminal phosphate group?",
                 answers: ["DNA", "Glucose", "ADP"],
                 correct: 2,
-                explanation: "ATP becomes ADP when it loses its terminal phosphate group."
+                explanation: "ATP becomes ADP after losing its terminal phosphate group."
             }
         ]
     },
 
-    // LEVEL 5
     {
         name: "Level 5: Cell Survival",
-
         questions: [
             {
                 question: "What is homeostasis?",
@@ -138,7 +127,7 @@ const levels = [
                     "Breaking down DNA"
                 ],
                 correct: 0,
-                explanation: "Homeostasis means maintaining relatively stable internal conditions."
+                explanation: "Homeostasis means maintaining stable internal conditions."
             },
             {
                 question: "How does the cell membrane help maintain homeostasis?",
@@ -162,7 +151,6 @@ const levels = [
             }
         ]
     }
-
 ];
 
 
@@ -172,13 +160,10 @@ const levels = [
 
 let points = 0;
 let lives = 3;
-
 let currentLevel = 0;
 let currentQuestion = 0;
-
 let correctAnswers = 0;
 let unlockedLevel = 0;
-
 let completedLevels = [];
 
 
@@ -195,92 +180,63 @@ const pointsText = document.getElementById("points");
 const livesText = document.getElementById("lives");
 
 const levelList = document.getElementById("level-list");
-
 const questionText = document.getElementById("question");
 const answers = document.getElementById("answers");
-
 const feedback = document.getElementById("feedback");
 const nextButton = document.getElementById("next");
 
 
 /* =====================================
-   SHOW SCREENS
+   SCREEN NAVIGATION
 ===================================== */
 
 function showScreen(screen) {
+    home.hidden = true;
+    levelsScreen.hidden = true;
+    game.hidden = true;
+    results.hidden = true;
 
-    home.classList.add("hidden");
-    levelsScreen.classList.add("hidden");
-    game.classList.add("hidden");
-    results.classList.add("hidden");
-
-    screen.classList.remove("hidden");
-
+    screen.hidden = false;
 }
 
 
 /* =====================================
-   UPDATE POINTS AND LIVES
+   UPDATE STATS
 ===================================== */
 
 function updateStats() {
-
     pointsText.textContent = points;
     livesText.textContent = lives;
-
 }
 
 
 /* =====================================
-   START GAME
-===================================== */
-
-document.getElementById("start").addEventListener("click", function() {
-
-    showLevels();
-
-});
-
-
-/* =====================================
-   SHOW LEVELS
+   SHOW MISSIONS
 ===================================== */
 
 function showLevels() {
-
     showScreen(levelsScreen);
-
     levelList.innerHTML = "";
 
     levels.forEach(function(level, index) {
-
         const button = document.createElement("button");
 
         if (completedLevels.includes(index)) {
-
             button.textContent = "✓ " + level.name;
             button.classList.add("completed");
-
         } else if (index <= unlockedLevel) {
-
             button.textContent = "🔓 " + level.name;
-
         } else {
-
             button.textContent = "🔒 " + level.name;
-
         }
 
         button.disabled = index > unlockedLevel;
 
         button.addEventListener("click", function() {
-
             startLevel(index);
-
         });
 
         levelList.appendChild(button);
-
     });
 
     document.getElementById("progress-text").textContent =
@@ -288,23 +244,19 @@ function showLevels() {
 
     document.getElementById("progress-fill").style.width =
         (completedLevels.length / 5 * 100) + "%";
-
 }
 
 
 /* =====================================
-   START A LEVEL
+   START LEVEL
 ===================================== */
 
-function startLevel(levelIndex) {
-
-    currentLevel = levelIndex;
+function startLevel(index) {
+    currentLevel = index;
     currentQuestion = 0;
 
     showScreen(game);
-
     showQuestion();
-
 }
 
 
@@ -313,7 +265,6 @@ function startLevel(levelIndex) {
 ===================================== */
 
 function showQuestion() {
-
     const question = levels[currentLevel].questions[currentQuestion];
 
     document.getElementById("level-name").textContent =
@@ -327,31 +278,22 @@ function showQuestion() {
     answers.innerHTML = "";
 
     feedback.textContent = "";
-    feedback.classList.add("hidden");
+    feedback.hidden = true;
+    feedback.classList.remove("correct-feedback", "incorrect-feedback");
 
-    feedback.classList.remove(
-        "correct-feedback",
-        "incorrect-feedback"
-    );
-
-    nextButton.classList.add("hidden");
+    nextButton.hidden = true;
 
     question.answers.forEach(function(answer, index) {
-
         const button = document.createElement("button");
 
         button.textContent = answer;
 
         button.addEventListener("click", function() {
-
             checkAnswer(index);
-
         });
 
         answers.appendChild(button);
-
     });
-
 }
 
 
@@ -360,20 +302,14 @@ function showQuestion() {
 ===================================== */
 
 function checkAnswer(selectedAnswer) {
-
     const question = levels[currentLevel].questions[currentQuestion];
-
     const buttons = answers.querySelectorAll("button");
 
-    // Prevent multiple answers
     buttons.forEach(function(button) {
-
         button.disabled = true;
-
     });
 
     if (selectedAnswer === question.correct) {
-
         points += 100;
         correctAnswers++;
 
@@ -385,36 +321,29 @@ function checkAnswer(selectedAnswer) {
         feedback.classList.add("correct-feedback");
 
     } else {
-
         lives--;
 
         buttons[selectedAnswer].classList.add("incorrect");
-
         buttons[question.correct].classList.add("correct");
 
         feedback.textContent =
             "Incorrect! You lost one life. " + question.explanation;
 
         feedback.classList.add("incorrect-feedback");
-
     }
 
-    feedback.classList.remove("hidden");
-
+    feedback.hidden = false;
     updateStats();
 
-    nextButton.classList.remove("hidden");
+    nextButton.hidden = false;
 
-    if (currentQuestion === 2) {
-
+    if (lives <= 0) {
+        nextButton.textContent = "Restart Mission";
+    } else if (currentQuestion === 2) {
         nextButton.textContent = "Finish Mission →";
-
     } else {
-
         nextButton.textContent = "Next Question →";
-
     }
-
 }
 
 
@@ -422,82 +351,58 @@ function checkAnswer(selectedAnswer) {
    NEXT QUESTION
 ===================================== */
 
-nextButton.addEventListener("click", function() {
-
-    // Check if the player lost all lives
+function nextQuestion() {
     if (lives <= 0) {
-
-        alert("You lost all your lives! This mission will restart.");
+        alert("You lost all your lives! The mission will restart.");
 
         lives = 3;
         currentQuestion = 0;
 
         updateStats();
-
         showQuestion();
-
         return;
-
     }
 
     currentQuestion++;
 
     if (currentQuestion < 3) {
-
         showQuestion();
-
     } else {
-
         finishLevel();
-
     }
-
-});
-
-
-/* =====================================
-   FINISH LEVEL
-===================================== */
-
-function finishLevel() {
-
-    // Give the bonus only the first time the level is completed
-    if (!completedLevels.includes(currentLevel)) {
-
-        points += 200;
-
-        completedLevels.push(currentLevel);
-
-    }
-
-    updateStats();
-
-    if (currentLevel < 4) {
-
-        unlockedLevel = Math.max(
-            unlockedLevel,
-            currentLevel + 1
-        );
-
-        alert("Mission completed! You earned 200 bonus points.");
-
-        showLevels();
-
-    } else {
-
-        showResults();
-
-    }
-
 }
 
 
 /* =====================================
-   SHOW FINAL RESULTS
+   FINISH MISSION
+===================================== */
+
+function finishLevel() {
+    if (!completedLevels.includes(currentLevel)) {
+        points += 200;
+        completedLevels.push(currentLevel);
+    }
+
+    if (currentLevel < 4) {
+        unlockedLevel = Math.max(unlockedLevel, currentLevel + 1);
+
+        updateStats();
+
+        alert("Mission completed! You earned 200 bonus points.");
+
+        showLevels();
+    } else {
+        updateStats();
+        showResults();
+    }
+}
+
+
+/* =====================================
+   FINAL RESULTS
 ===================================== */
 
 function showResults() {
-
     showScreen(results);
 
     document.getElementById("final-score").textContent = points;
@@ -507,7 +412,6 @@ function showResults() {
 
     document.getElementById("final-levels").textContent =
         "Missions completed: " + completedLevels.length + " / 5";
-
 }
 
 
@@ -515,35 +419,31 @@ function showResults() {
    RESTART GAME
 ===================================== */
 
-document.getElementById("restart").addEventListener("click", function() {
-
+function restartGame() {
     points = 0;
     lives = 3;
-
     currentLevel = 0;
     currentQuestion = 0;
-
     correctAnswers = 0;
     unlockedLevel = 0;
-
     completedLevels = [];
 
     updateStats();
-
-    showLevels();
-
-});
+    showScreen(home);
+}
 
 
 /* =====================================
-   BACK TO LEVELS
+   BUTTON EVENTS
 ===================================== */
 
-document.getElementById("back").addEventListener("click", function() {
+document.getElementById("start").addEventListener("click", showLevels);
 
-    showLevels();
+nextButton.addEventListener("click", nextQuestion);
 
-});
+document.getElementById("back").addEventListener("click", showLevels);
+
+document.getElementById("restart").addEventListener("click", restartGame);
 
 
 /* =====================================
@@ -551,3 +451,4 @@ document.getElementById("back").addEventListener("click", function() {
 ===================================== */
 
 updateStats();
+showScreen(home);

@@ -8,118 +8,81 @@
     <link rel="stylesheet" href="style.css">
     <script src="actions.js" defer></script>
 </head>
-
 <body>
 
-    <header>
-        <div>
-            <h1>🧬 Cell Quest</h1>
-            <p>The Survival Challenge</p>
+<header>
+    <div>
+        <h1>🧬 Cell Quest</h1>
+        <p>The Survival Challenge</p>
+    </div>
+
+    <div class="stats">
+        <span>⭐ Points: <strong id="points">0</strong></span>
+        <span>❤️ Lives: <strong id="lives">3</strong></span>
+    </div>
+</header>
+
+<main>
+
+    <!-- HOME -->
+    <section id="home">
+        <div class="emoji">🔬</div>
+        <p class="eyebrow">WELCOME, CELL EXPLORER</p>
+        <h2>Welcome to Cell Quest!</h2>
+        <p>Can you complete all five biology missions and help the cell survive?</p>
+        <button id="start">Start Game →</button>
+    </section>
+
+    <!-- MISSIONS -->
+    <section id="levels" hidden>
+        <p class="eyebrow">YOUR JOURNEY</p>
+        <h2>Choose a Mission</h2>
+        <p>Complete each mission to unlock the next one.</p>
+
+        <p id="progress-text">0 of 5 missions completed</p>
+
+        <div class="progress-bar">
+            <div id="progress-fill"></div>
         </div>
 
-        <div class="stats">
-            <span>⭐ Points: <strong id="points">0</strong></span>
-            <span>❤️ Lives: <strong id="lives">3</strong></span>
-        </div>
-    </header>
+        <div id="level-list"></div>
+    </section>
 
-    <main>
+    <!-- QUESTIONS -->
+    <section id="game" hidden>
+        <button id="back" class="back-button">← Back to Missions</button>
 
-        <!-- HOME SCREEN -->
-        <section id="home">
-            <span class="emoji">🔬</span>
-            <h2>Welcome to Cell Quest!</h2>
+        <p id="level-name" class="eyebrow"></p>
+        <p id="question-number"></p>
 
-            <p>
-                Can you complete all five biology missions
-                and help the cell survive?
-            </p>
+        <h2 id="question"></h2>
+        <p>Choose the correct answer.</p>
 
-            <button id="start">Start Game →</button>
-        </section>
+        <div id="answers"></div>
 
+        <div id="feedback" hidden></div>
 
-        <!-- LEVEL SELECTION -->
-        <section id="levels" class="hidden">
-            <h2>Choose a Mission</h2>
+        <button id="next" hidden>Next Question →</button>
+    </section>
 
-            <p>
-                Complete each mission to unlock the next one.
-            </p>
+    <!-- RESULTS -->
+    <section id="results" hidden>
+        <div class="emoji">🏆</div>
+        <h2>You completed Cell Quest!</h2>
+        <p>Your final score:</p>
+        <h1 id="final-score">0</h1>
+        <p id="final-correct"></p>
+        <p id="final-levels"></p>
+        <button id="restart">Play Again ↻</button>
+    </section>
 
-            <div class="progress-area">
-                <p id="progress-text">0 of 5 missions completed</p>
+    <footer>
+        <a href="PASTE_YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" rel="noopener noreferrer">
+            Give feedback about the game
+        </a>
+    </footer>
 
-                <div class="progress-bar">
-                    <div id="progress-fill"></div>
-                </div>
-            </div>
-
-            <div id="level-list"></div>
-        </section>
-
-
-        <!-- GAME SCREEN -->
-        <section id="game" class="hidden">
-
-            <button id="back" class="back-button">
-                ← Back to Missions
-            </button>
-
-            <p id="level-name"></p>
-            <p id="question-number"></p>
-
-            <h2 id="question"></h2>
-
-            <p id="instruction">
-                Choose the correct answer.
-            </p>
-
-            <div id="answers"></div>
-
-            <div id="feedback" class="hidden"></div>
-
-            <button id="next" class="hidden">
-                Next Question →
-            </button>
-
-        </section>
-
-
-        <!-- FINAL RESULTS -->
-        <section id="results" class="hidden">
-
-            <span class="emoji">🏆</span>
-
-            <h2>You completed Cell Quest!</h2>
-
-            <p>Your final score:</p>
-
-            <h1 id="final-score">0</h1>
-
-            <p id="final-correct"></p>
-
-            <p id="final-levels"></p>
-
-            <button id="restart">
-                Play Again ↻
-            </button>
-
-        </section>
-
-
-        <!-- FEEDBACK FORM -->
-        <footer>
-            <a
-                href="PASTE_YOUR_GOOGLE_FORM_LINK_HERE"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Give feedback about the game
-            </a>
-        </footer>
-
-    </main>
+</main>
 
 </body>
 </html>
